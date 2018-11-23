@@ -1,0 +1,46 @@
+﻿@model new_job_now.Models.ApplyForJob
+
+@{
+    ViewBag.Title = "DetailsOfJob";
+    Layout = "~/Views/shared/_Main Layout.cshtml";
+}
+
+<h2>تفاصيل الوظيفة</h2>
+
+<div>
+    <h4>ApplyForJob</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.job.Jobtitel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.job.Jobtitel)
+        </dd>
+
+
+        
+
+        <dt>
+            نص الرسالة
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+        <dt>
+            تاريخ الارسال
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplyDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("العودة", "GetJobByUser")
+</p>

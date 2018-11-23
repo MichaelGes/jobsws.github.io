@@ -1,0 +1,83 @@
+﻿@using Microsoft.AspNet.Identity
+@using WebApplication1.Models
+
+@if(Request.IsAuthenticated)
+{
+
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoff" }))
+    {
+        var db = new ApplicationDbContext();
+        var UserID = User.Identity.GetUserId();
+        var CurrentUser = db.Users.Where(a => a.Id == UserID).SingleOrDefault();
+
+       @Html.AntiForgeryToken()
+        
+            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                <strong>  @CurrentUser.UserName: مرحبا بك يا   </strong>
+            </button>
+            <div class="dropdown">
+                <div class="dropdown-menu" >
+                    @if (CurrentUser.UserType == "الناشرون")
+                    {
+                        <div class="ttt">
+                            <strong>  @CurrentUser.UserName </strong>
+                            <a class="btn btn-primary" href="~/jobs/Create">اضافة وظيفة</a>
+                        </div>
+                        <div class="nnn">
+                            <a class="btn btn-info" href="~/Home/GetJobByPublisher">الواظائف التي قمت بنشرها</a> <br />
+                           
+                        </div>
+                        
+                    }
+                    else
+                    {
+                        <a class="dropdown-item" href="~/Home/GetJobByUser" >الواظائف التي تقدمت اليها</a>
+                            
+
+                    }
+                  
+                        
+                               
+                                    <a  class="btn btn-warning"  href="~/Account/EditProFile"> تعديل الحساب</a>   
+                                    <a   class="btn btn-danger"  href="Javascript:document.getElementById('logoff').submit()">تسجيل الخروج</a>
+                              
+
+
+                           
+                        </div>
+                    </div>
+           
+
+
+
+
+
+
+
+            @*<li>
+                @Html.ActionLink("مرحيا ب يا"+User.Identity.GetUserName(),"Index","Manage")
+            </li>
+            <li>
+                <a href="Javascript:document.getElementById('logoff').submit()">تسجيل الخروج</a>
+            </li>*@
+
+        
+    }
+}
+
+else
+{
+
+    <ul class="nav justify-content-right"style="padding-right:20px">
+        <li class="nav-item">
+            <a class="nav-link active" href="~/Account/Register">اشتراك<i class="fas fa-sign-out-alt"></i> </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="~/Account/Login">  تسجيل الدخول <i class="fas fa-user-plus"></i> </a>
+        </li>
+
+    </ul>
+
+
+}
+<script src="~/scripts/jquery-3.3.1.min.js"></script>

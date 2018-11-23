@@ -1,0 +1,49 @@
+﻿@model new_job_now.Models.ApplyForJob
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/shared/_Main Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>هل انت متاكد من حذف هذة الوظيفة</h3>
+<div>
+    <h4>ApplyForJob</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           عنون الوظيفة
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.job.Jobtitel)
+        </dd>
+
+        <dt>
+            نص الرسالة
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+        <dt>
+            تاريخ الرسال
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApplyDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
